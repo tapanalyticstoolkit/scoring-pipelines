@@ -30,7 +30,19 @@ This section covers how to run the Scoring Pipeline locally.
 
 1. After cloning the repository, `cd` to `CLONED_DIR/scoring-pipelines/scoring_pipelines`.
 
-2. Copy the tar archive (`advscore.tar`) containing the **configuration file** (`config.json`) and the **python script** (`test_script.py`) to be executed into this dir. 
+2. Copy the tar archive (`advscore.tar`) containing the **configuration file** (`config.json`) and the **python script** (`test_script.py`) to be executed into this dir. The configuration file needs the following fields included:
+
+    "file_name" -- python script that needs to be executed on every streaming record **test_script.py**
+
+    "func_name" -- name of the function in the python script that needs to be invoked **evaluate**
+
+    "input_schema" -- schema of the incoming streaming record
+
+    "src_topic" -- kafka topic from where to start consuming the records (in case of Kafka streaming) else this field should be empty **input**
+
+    "sink_topic" -- kafka topic to which the app starts writing the predictions (in case of Kafka streaming) else this field should be empty **output**
+
+    **Note:** For Kafka Streaming, both source and sink topics need to be specified
 
 3. Run the app:  
     `$ ipython scoringExecutor.py advscore.tar`
@@ -45,25 +57,6 @@ This section covers how to run the Scoring Pipeline locally.
 4. You can now post requests to the scoring pipeline using curl commands as follows:
 
     curl -H "Content-type: application/json" -X POST -d '{"message": "4/3/2016 10:32, P0001,1,0.0001,....., 192,-4.1158,192,3.8264"}' http://localhost:9100/v1/score 
-
-(Dan to Anjali: I removed some TAP UI instantiation steps and renumberd the remaining two steps. Is any of this information useful to someone running the app locally?. Please read through the next two steps carefully and let me know. I am pretty sure the url in step 5 needs to change at minimum.)
-
-5. Now call the scoring pipeline's REST endpoint to load the tar archive (`advscore.tar`) containing the **configuration file** (`config.json`) and the **python script** (`test_script.py`) to be executed.
-    curl -i -X POST -F file=@advscore.tar  "http://etlScoring.demotrustedanalytics.com"
-
-6. The configuration file needs the following fields included:
-
-    "file_name" -- python script that needs to be executed on every streaming record **test_script.py**
-
-    "func_name" -- name of the function in the python script that needs to be invoked **evaluate**
-
-    "input_schema" -- schema of the incoming streaming record
-
-    "src_topic" -- kafka topic from where to start consuming the records (in case of Kafka streaming) else this field should be empty **input**
-
-    "sink_topic" -- kafka topic to which the app starts writing the predictions (in case of Kafka streaming) else this field should be empty **output**
-
-    Note: For Kafka Streaming, both source and sink topics need to be specified
 
 ##Scoring Pipeline config file template
 
