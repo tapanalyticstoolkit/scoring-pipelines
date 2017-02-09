@@ -1,14 +1,16 @@
-#scoring-pipelines
+# scoring-pipelines
 
 This repo contains file to access the scoring-pipeline.
 
-##What's new
+## What's new
 
 This is the initial release of the `scoring-pipelines` repo.
 
-##Known issues
+## Known issues
 
 None.
+
+## Overview
 
 The Scoring Pipeline is a Python application that can be used to perform ETL transformations followed by scoring on a deployed model (via the Scoring Engine), on a stream of records. The result is then either sent back to the client posting the request or queued up on a Kafka sink topic, depending upon the mode that the application was configured during initialization.
 
@@ -26,7 +28,7 @@ This section covers how to run the Scoring Pipeline locally.
 
 >If you don't need to perform transformations prior to scoring, you can use the [Scoring Engine](https://github.com/tapanalyticstoolkit/model-scoring-java) instead of the Scoring Pipeline.  
 
-##Running Scoring Pipeline locally
+## Running Scoring Pipeline locally
 
 1. After cloning the repository, `cd` to `CLONED_DIR/scoring-pipelines/scoring_pipelines`.
 
@@ -58,7 +60,7 @@ This section covers how to run the Scoring Pipeline locally.
 
     curl -H "Content-type: application/json" -X POST -d '{"message": "4/3/2016 10:32, P0001,1,0.0001,....., 192,-4.1158,192,3.8264"}' http://localhost:9100/v1/score 
 
-##Scoring Pipeline config file template
+## Scoring Pipeline config file template
 
 The JSON sample below configures the scoring pipeline for Kafka streaming mode:
 
@@ -106,7 +108,7 @@ The JSON sample below configures the scoring pipeline for REST endpoint streamin
 
 
 
-##Scoring Pipeline Python Script Example
+## Scoring Pipeline Python Script Example
 
 .. code ::
 
@@ -177,11 +179,11 @@ The JSON sample below configures the scoring pipeline for REST endpoint streamin
 
 >For more information on the Scoring Engine, visit: https://github.com/tapanalyticstoolkit/model-scoring-java
 
-7) If the Scoring Pipeline was configured to work with Kafka messaging queues, then start streaming records to the source-topic.
+5. If the Scoring Pipeline was configured to work with Kafka messaging queues, then start streaming records to the source-topic.
 
 (Dan to Anjali: The url in step 8 should probably change also.)
 
-8) If the Scoring Pipeline was configured to use the REST endpoints, then post requests using a curl command as follows:
+6. If the Scoring Pipeline was configured to use the REST endpoints, then post requests using a curl command as follows:
     curl -H "Content-type: application/json" -X POST -d '{"message": "4/3/2016 10:32, P0001,1,0.0001,....., 192,-4.1158,192,3.8264"}' http://etlscoring.demotrustedanalytics.com/v2/score
 
 
