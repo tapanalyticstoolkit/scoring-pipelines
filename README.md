@@ -179,11 +179,9 @@ The JSON sample below configures the scoring pipeline for REST endpoint streamin
 
 >For more information on the Scoring Engine, visit: https://github.com/tapanalyticstoolkit/model-scoring-java
 
-5. If the Scoring Pipeline was configured to work with Kafka messaging queues, then start streaming records to the source-topic.
+1. If the Scoring Pipeline was configured to work with Kafka messaging queues, then start streaming records to the source-topic.
 
-(Dan to Anjali: The url in step 8 should probably change also.)
-
-6. If the Scoring Pipeline was configured to use the REST endpoints, then post requests using a curl command as follows:
+2. If the Scoring Pipeline was configured to use the REST endpoints, then post requests using a curl command as follows:
     curl -H "Content-type: application/json" -X POST -d '{"message": "4/3/2016 10:32, P0001,1,0.0001,....., 192,-4.1158,192,3.8264"}' http://etlscoring.demotrustedanalytics.com/v2/score
 
 
