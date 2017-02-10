@@ -1,6 +1,6 @@
 # scoring-pipelines
 
-This repo contains file to access the scoring-pipeline.
+This repo contains files used to access the scoring-pipeline.
 
 ## What's new
 
